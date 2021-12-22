@@ -1,0 +1,14 @@
+.git/
+.gitignore
+
+Dockerfile
+.dockerignore
+
+__pycache__/
+*.pyc
+
+.DS_Store
+
+/static/
+/venv/
+*.sqlite3
