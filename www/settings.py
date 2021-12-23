@@ -8,12 +8,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 ALLOWED_HOSTS = json.loads(os.environ.setdefault('ALLOWED_HOSTS', '[]'))
 
 # Database
-DATABASES = {
+DATABASES = json.loads(os.environ.setdefault('DATABASES', json.dumps({
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': str(BASE_DIR / 'db.sqlite3'),
     }
-}
+})))
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Debugging
