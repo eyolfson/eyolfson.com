@@ -5,6 +5,7 @@ __pycache__/
 
 /static/
 /venv/
+/.env
 *.sqlite3
 
 /.dockerversion
