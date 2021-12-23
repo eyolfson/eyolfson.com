@@ -1,8 +1,14 @@
 .git/
 .gitignore
+.gitmodules
 
 Dockerfile
 .dockerignore
+
+/build.sh
+/bulma/
+/VERSION
+/version.sh
 
 __pycache__/
 *.pyc

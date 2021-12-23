@@ -6,3 +6,5 @@ __pycache__/
 /static/
 /venv/
 *.sqlite3
+
+/.dockerversion
