@@ -7,6 +7,7 @@ Dockerfile
 
 /build.sh
 /bulma/
+/sass/
 /VERSION
 /version.sh
 
