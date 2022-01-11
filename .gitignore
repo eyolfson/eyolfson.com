@@ -3,7 +3,8 @@ __pycache__/
 
 .DS_Store
 
-/static/
+/static/*
+!/static/js/
 /venv/
 /.env
 *.sqlite3
