@@ -2,6 +2,14 @@
 
 A simple Django site.
 
+# Static Files
+
+You need to ensure you have the CSS files setup. If you're on macOS, you can
+install the command line tool with `brew install sass/sass/sass`. Afterwards,
+run the following command in the base directory:
+
+    sass --no-source-map sass/main.scss static/css/main.css
+
 ## Docker
 
 The `build.sh` creates a properly versioned Docker image with two tags: latest,
