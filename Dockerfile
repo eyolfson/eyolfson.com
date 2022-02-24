@@ -1,4 +1,4 @@
-FROM python:slim-bullseye
+FROM python:3.10.2-slim-bullseye
 
 WORKDIR /opt/eyolfson.com
 
