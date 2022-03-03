@@ -1,0 +1,4 @@
+boto3
+Django
+django-cleanup
+django-storages
