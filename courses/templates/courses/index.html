@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Courses - {{ request.site.name }}{% endblock %}
+
+{% block content %}
+<div class="block">
+  <h1 class="title">Courses</h1>
+</div>
+
+<div class="block">
+  <ul>
+  {% for offering in offerings %}
+    <li>
+      <a href="{% url 'courses:course' offering.course.slug %}">
+        {{ offering }}
+      </a>
+    </li>
+  {% empty %}
+    <li>There are no active courses.</li>
+  {% endfor %}
+  </ul>
+</div>
+
+<div class="block">
+  <h2 class="title is-4"><a href="{% url 'courses:archive' %}">Archive</a></h2>
+</div>
+
+<div class="block">
+  <ul>
+  {% for offering in archive_offerings %}
+    <li>
+      <a href="{% url 'courses:archive_offering' offering.course.institution.slug offering.course.slug offering.slug %}">
+        {{ offering }}
+      </a>
+    </li>
+  {% empty %}
+    <li>There are no archived courses.</li>
+  {% endfor %}
+  </ul>
+</div>
+{% endblock %}

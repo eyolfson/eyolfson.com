@@ -22,6 +22,7 @@ DEBUG = json.loads(os.environ.setdefault('DEBUG', 'true'))
 # File uploads
 DEFAULT_FILE_STORAGE = os.environ.setdefault('DEFAULT_FILE_STORAGE',
     'django.core.files.storage.FileSystemStorage')
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Globalization (i18n/l10n)
 LANGUAGE_CODE = 'en-us'
@@ -38,17 +39,21 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.sites.middleware.CurrentSiteMiddleware',
 ]
 WSGI_APPLICATION = 'www.wsgi.application'
 
 # Models
 INSTALLED_APPS = [
+    'courses',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sites',
     'django.contrib.staticfiles',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 # Security
@@ -73,6 +78,8 @@ TEMPLATES = [
 ]
 
 # URLs
+APPEND_SLASH = True
+PREPEND_WWW = False
 ROOT_URLCONF = 'www.urls'
 
 # Auth
@@ -91,6 +98,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Sites
+SITE_ID = json.loads(os.environ.setdefault('SITE_ID', '1'))
+
 # Static Files
 STATIC_URL = os.environ.setdefault('STATIC_URL', 'static/')
 STATICFILES_DIRS = [BASE_DIR / 'static']
@@ -102,3 +112,4 @@ AWS_S3_ACCESS_KEY_ID = os.environ.setdefault('AWS_S3_ACCESS_KEY_ID', '')
 AWS_S3_CUSTOM_DOMAIN = os.environ.setdefault('AWS_S3_CUSTOM_DOMAIN', '')
 AWS_S3_ENDPOINT_URL = os.environ.setdefault('AWS_S3_ENDPOINT_URL', '')
 AWS_S3_SECRET_ACCESS_KEY = os.environ.setdefault('AWS_S3_SECRET_ACCESS_KEY', '')
+AWS_S3_FILE_OVERWRITE = True

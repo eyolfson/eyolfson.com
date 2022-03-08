@@ -16,6 +16,7 @@ __pycache__/
 
 .DS_Store
 
+/media/
 /static/
 /venv/
 /.env

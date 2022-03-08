@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Course Archive - {{ request.site.name }}{% endblock %}
+
+{% block content %}
+<div class="block">
+  <h1 class="title">Course Archive</h1>
+</div>
+
+  {% if offerings.exists %}
+    {% regroup offerings by course.institution as entries %}
+    {% for entry in entries %}
+<div class="block">
+  <h2 class="title is-4">
+    <a href="{% url 'courses:archive_institution' entry.grouper.slug %}">
+      {{ entry.grouper }}
+    </a>
+  </h2>
+</div>
+
+<div class="block">
+  <ul>
+      {% for offering in entry.list %}
+    <li>
+      <a href="{% url 'courses:archive_offering' offering.course.institution.slug offering.course.slug offering.slug %}">
+        {{ offering }}
+      </a>
+    </li>
+      {% endfor %}
+  </ul>
+</div>
+    {% endfor %}
+  {% else %}
+<div class="block">
+  <ul>
+    <li>There are no archived courses.</li>
+  </ul>
+</div>
+  {% endif %}
+{% endblock %}

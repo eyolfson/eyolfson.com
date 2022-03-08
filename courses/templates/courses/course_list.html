@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}{{ institution }} Course Archive - {{ request.site.name }}{% endblock %}
+
+{% block content %}
+<div class="block">
+  <h1 class="title">{{ institution }} Course Archive</h1>
+</div>
+
+{% regroup offerings by course as entries %}
+{% for entry in entries %}
+<div class="block">
+  <h2 class="title is-4">
+    <a href="{% url 'courses:archive_course' entry.grouper.institution.slug entry.grouper.slug %}">
+      {{ entry.grouper }}
+    </a>
+  </h2>
+</div>
+
+<div class="block">
+  <ul>
+    {% for offering in entry.list %}
+    <li>
+      <a href="{% url 'courses:archive_offering' offering.course.institution.slug offering.course.slug offering.slug %}">
+        {{ offering }}
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endfor %}
+{% endblock %}

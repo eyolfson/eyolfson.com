@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}{{ offering.course.name }} - {{ request.site.name }}{% endblock %}
+
+{% block content %}
+<div class="block">
+  <h1 class="title">{{ offering.course.name }}</h1>
+  <p class="subtitle is-5">{{ offering.name }} {{ offering.course.title }}</p>
+</div>
+
+  {% if lectures.exists %}
+<div class="block">
+  <h2 class="title is-4">Lectures</h2>
+</div>
+    {% include "courses/resource_table.html" with resources=lectures %}
+  {% endif %}
+
+  {% if links.exists %}
+<div class="block">
+  <h2 class="title is-4">Links</h2>
+</div>
+<div class="block">
+  <ul>
+    {% for link in links %}
+    <li><a href="{{ link.url }}">{{ link.title }} </a></li>
+    {% endfor %}
+  </ul>
+</div>
+  {% endif %}
+{% endblock %}

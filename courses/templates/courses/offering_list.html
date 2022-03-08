@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}{{ course.name }} Archive - {{ request.site.name }}{% endblock %}
+
+{% block content %}
+<div class="block">
+  <h1 class="title">{{ course.name }} Archive</h1>
+</div>
+
+<div class="block">
+  <ul>
+    {% for offering in offerings %}
+    <li>
+      <a href="{% url 'courses:archive_offering' offering.course.institution.slug offering.course.slug offering.slug %}">
+        {{ offering }}
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

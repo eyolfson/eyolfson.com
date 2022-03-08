@@ -1,0 +1,33 @@
+{% with has_links=resources.has_links %}
+<div class="block">
+  <table class="table is-narrow">
+    <thead>
+      <tr>
+        <th class="has-text-center">#</th>
+        <th class="has-text-left">Title</th>
+  {% if has_links %}
+        <th class="has-text-left">Links</th>
+  {% endif %}
+      </tr>
+    </thead>
+    <tbody>
+  {% for resource in resources %}
+      <tr>
+        <td class="has-text-center">{{ resource.number }}</td>
+        <td class="has-text-left">{{ resource.title }}</a></td>
+    {% if has_links %}
+        <td class="has-text-left">
+      {% for link in resource.link_set.all %}
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        {% if not forloop.last %}
+          <br />
+        {% endif %}
+      {% endfor %}
+        </td>
+    {% endif %}
+      </tr>
+  {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endwith %}
