@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Not Found - {{ request.site.name }}{% endblock %}
+
+{% block content %}
+<div class="block">
+  <h1 class="title has-text-danger">Not Found</h1>
+</div>
+
+<div class="block">
+  <p class="has-text-danger">
+    Request path <span class="is-family-code">{{ request_path }}</span> does
+    not exist on this server.
+  </p>
+</div>
+{% endblock %}
