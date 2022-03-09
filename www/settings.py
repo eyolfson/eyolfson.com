@@ -103,7 +103,12 @@ SITE_ID = json.loads(os.environ.setdefault('SITE_ID', '1'))
 
 # Static Files
 STATIC_URL = os.environ.setdefault('STATIC_URL', 'static/')
-STATICFILES_DIRS = [BASE_DIR / 'static']
+STATICFILES_DIRS = json.loads(
+    os.environ.setdefault('STATICFILES_DIRS', json.dumps(
+            [str(BASE_DIR / 'static')]
+        )
+    )
+)
 STATICFILES_STORAGE = os.environ.setdefault('STATICFILES_STORAGE',
     'django.contrib.staticfiles.storage.StaticFilesStorage')
 
