@@ -14,7 +14,11 @@
   {% for resource in resources %}
       <tr>
         <td class="has-text-center">{{ resource.number }}</td>
-        <td class="has-text-left">{{ resource.title }}</a></td>
+        <td class="has-text-left">
+          <a href="{{ resource.file.url }}">
+            {{ resource.title }}
+          </a>
+        </td>
     {% if has_links %}
         <td class="has-text-left">
       {% for link in resource.link_set.all %}

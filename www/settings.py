@@ -26,6 +26,7 @@ DEBUG = json.loads(os.environ.setdefault('DEBUG', 'true'))
 DEFAULT_FILE_STORAGE = os.environ.setdefault('DEFAULT_FILE_STORAGE',
     'django.core.files.storage.FileSystemStorage')
 MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = os.environ.setdefault('MEDIA_URL', 'media/')
 
 # Globalization (i18n/l10n)
 LANGUAGE_CODE = 'en-us'
