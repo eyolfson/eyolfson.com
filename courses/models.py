@@ -136,10 +136,16 @@ class Resource(models.Model):
     finals = FinalManager()
 
     def __str__(self):
-        return self.title
+        kind_label = Resource.Kind(self.kind).label
+        if self.number:
+            number = f' {self.number}'
+        else:
+            number = ''
+        return f'{self.title} - {kind_label}{number} - {self.offering}'
 
     class Meta:
-        ordering = ['kind', 'number']
+        unique_together = ['offering', 'kind', 'number']
+        ordering = ['offering', 'kind', 'number']
 
 class LinkQuerySet(models.QuerySet):
 
@@ -151,6 +157,8 @@ class Link(models.Model):
     offering = models.ForeignKey(
         Offering,
         on_delete=models.CASCADE,
+        blank=True,
+        null=True,
     )
     resource = models.ForeignKey(
         Resource,
@@ -168,4 +176,14 @@ class Link(models.Model):
         return self.title
 
     class Meta:
-        ordering = ['number']
+        constraints = [
+            models.CheckConstraint(
+                check=models.Q(offering__isnull=True, resource__isnull=False)
+                      | models.Q(offering__isnull=False, resource__isnull=True),
+                name='mutually_exclusive_offering_or_resource'),
+        ]
+        ordering = ['offering', 'resource', 'number']
+        unique_together = [
+            ['offering', 'number'],
+            ['resource', 'number'],
+        ]
