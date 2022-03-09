@@ -6,6 +6,9 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 ALLOWED_HOSTS = json.loads(os.environ.setdefault('ALLOWED_HOSTS', '[]'))
+CSRF_TRUSTED_ORIGINS = json.loads(
+    os.environ.setdefault('CSRF_TRUSTED_ORIGINS', '[]')
+)
 
 # Database
 DATABASES = json.loads(os.environ.setdefault('DATABASES', json.dumps({
