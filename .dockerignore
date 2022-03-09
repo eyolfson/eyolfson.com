@@ -8,6 +8,7 @@ Dockerfile
 /build.sh
 /bulma/
 /sass/
+/requirements-explicit.txt
 /VERSION
 /version.sh
 
