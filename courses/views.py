@@ -20,9 +20,11 @@ def index(request):
     })
 
 def offering_detail(request, offering):
+    assignments = Resource.assignments.filter(offering=offering)
     lectures = Resource.lectures.filter(offering=offering)
     links = Link.objects.standalone().filter(offering=offering)
     return render(request, 'courses/offering_detail.html', {
+        'assignments': assignments,
         'offering': offering,
         'lectures': lectures,
         'links': links,
