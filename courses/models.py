@@ -19,7 +19,7 @@ class Course(models.Model):
     )
     slug = models.SlugField(max_length=50)
     name = models.CharField(max_length=50)
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=80)
 
     def __str__(self):
         return f'{self.title} ({self.name})'
@@ -123,7 +123,7 @@ class Resource(models.Model):
     )
     file = models.FileField(upload_to=resource_path)
     kind = models.IntegerField(choices=Kind.choices)
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=80)
     number = models.IntegerField(blank=True, null=True)
     release_date = models.DateField(blank=True, null=True)
     due_date_time = models.DateTimeField(blank=True, null=True)
@@ -159,7 +159,7 @@ class Link(models.Model):
         null=True,
     )
     url = models.URLField()
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=80)
     number = models.IntegerField(blank=True, null=True)
 
     objects = LinkQuerySet.as_manager()
