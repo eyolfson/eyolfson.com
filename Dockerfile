@@ -7,9 +7,12 @@ RUN python -m venv $VIRTUAL_ENV
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 ENV PYTHONPATH="/opt/eyolfson.com"
 
+RUN apt-get update \
+  && apt-get install -y default-libmysqlclient-dev build-essential
 COPY requirements.txt .
 RUN pip install --upgrade pip \
   && pip install -r requirements.txt \
+  && pip install mysqlclient \
   && pip install daphne
 
 COPY . .
