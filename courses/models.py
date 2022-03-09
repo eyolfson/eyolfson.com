@@ -11,6 +11,9 @@ class Institution(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ['name']
+
 class Course(models.Model):
 
     institution = models.ForeignKey(
@@ -23,6 +26,9 @@ class Course(models.Model):
 
     def __str__(self):
         return f'{self.title} ({self.name})'
+
+    class Meta:
+        ordering = ['title']
 
 class Offering(models.Model):
 
@@ -39,7 +45,7 @@ class Offering(models.Model):
         return f'{self.name} {self.course}'
 
     class Meta:
-        ordering = ['-start']
+        ordering = ['-start', 'name']
 
 class ResourceQuerySet(models.QuerySet):
 
@@ -145,7 +151,7 @@ class Resource(models.Model):
 
     class Meta:
         unique_together = ['offering', 'kind', 'number']
-        ordering = ['offering', 'kind', 'number']
+        ordering = ['offering', 'kind', 'number', 'title']
 
 class LinkQuerySet(models.QuerySet):
 
@@ -182,7 +188,7 @@ class Link(models.Model):
                       | models.Q(offering__isnull=False, resource__isnull=True),
                 name='mutually_exclusive_offering_or_resource'),
         ]
-        ordering = ['offering', 'resource', 'number']
+        ordering = ['offering', 'resource', 'number', 'title']
         unique_together = [
             ['offering', 'number'],
             ['resource', 'number'],
