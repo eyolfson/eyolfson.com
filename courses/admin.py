@@ -17,7 +17,7 @@ class InstitutionAdmin(admin.ModelAdmin):
 
 @admin.register(Link)
 class LinkAdmin(admin.ModelAdmin):
-    list_display = ('title', 'resource', 'offering')
+    list_display = ('title', 'number', 'resource', 'offering')
 
 @admin.register(Offering)
 class OfferingAdmin(admin.ModelAdmin):
