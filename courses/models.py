@@ -53,18 +53,13 @@ class ResourceQuerySet(models.QuerySet):
         return self.annotate(num_links=models.Count('link')) \
                    .filter(num_links__gt=0).exists()
 
+    def has_numbers(self):
+        return self.filter(number__isnull=False).exists()
+
 class ResourceManager(models.Manager):
 
     def get_queryset(self):
         return ResourceQuerySet(self.model, using=self._db)
-
-class SyllabusManager(ResourceManager):
-
-    def get_queryset(self):
-        return super().get_queryset().filter(kind=Resource.Kind.SYLLABUS)
-
-    def has_links(self):
-        return self.get_queryset().has_links()
 
 class LectureManager(ResourceManager):
 
@@ -74,6 +69,9 @@ class LectureManager(ResourceManager):
     def has_links(self):
         return self.get_queryset().has_links()
 
+    def has_numbers(self):
+        return self.get_queryset().has_numbers()
+
 class AssignmentManager(ResourceManager):
 
     def get_queryset(self):
@@ -82,21 +80,23 @@ class AssignmentManager(ResourceManager):
     def has_links(self):
         return self.get_queryset().has_links()
 
-class MidtermManager(ResourceManager):
+    def has_numbers(self):
+        return self.get_queryset().has_numbers()
+
+class OtherManager(ResourceManager):
 
     def get_queryset(self):
-        return super().get_queryset().filter(kind=Resource.Kind.MIDTERM)
+        return super().get_queryset().filter(
+            models.Q(kind=Resource.Kind.SYLLABUS)
+            | models.Q(kind=Resource.Kind.MIDTERM)
+            | models.Q(kind=Resource.Kind.FINAL)
+        )
 
     def has_links(self):
         return self.get_queryset().has_links()
 
-class FinalManager(ResourceManager):
-
-    def get_queryset(self):
-        return super().get_queryset().filter(kind=Resource.Kind.FINAL)
-
-    def has_links(self):
-        return self.get_queryset().has_links()
+    def has_numbers(self):
+        return self.get_queryset().has_numbers()
 
 def resource_path(instance, filename):
     offering = instance.offering
@@ -135,11 +135,9 @@ class Resource(models.Model):
     due_date_time = models.DateTimeField(blank=True, null=True)
 
     objects = ResourceQuerySet.as_manager()
-    syllabuses = SyllabusManager()
     lectures = LectureManager()
     assignments = AssignmentManager()
-    midterms = MidtermManager()
-    finals = FinalManager()
+    others = OtherManager()
 
     def __str__(self):
         kind_label = Resource.Kind(self.kind).label

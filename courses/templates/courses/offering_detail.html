@@ -22,6 +22,13 @@
     {% include "courses/resource_table.html" with resources=assignments %}
   {% endif %}
 
+  {% if others.exists %}
+<div class="block">
+  <h2 class="title is-4">Resources</h2>
+</div>
+    {% include "courses/resource_table.html" with resources=others %}
+  {% endif %}
+
   {% if links.exists %}
 <div class="block">
   <h2 class="title is-4">Links</h2>

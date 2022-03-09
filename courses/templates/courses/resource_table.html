@@ -1,9 +1,11 @@
-{% with has_links=resources.has_links %}
+{% with has_links=resources.has_links has_numbers=resources.has_numbers %}
 <div class="block">
   <table class="table is-narrow">
     <thead>
       <tr>
-        <th class="has-text-center">#</th>
+  {% if has_numbers %}
+        <th class="has-text-centered">#</th>
+  {% endif %}
         <th class="has-text-left">Title</th>
   {% if has_links %}
         <th class="has-text-left">Links</th>
@@ -13,7 +15,13 @@
     <tbody>
   {% for resource in resources %}
       <tr>
-        <td class="has-text-center">{{ resource.number }}</td>
+    {% if has_numbers %}
+        <td class="has-text-centered">
+      {% if resource.number is not None %}
+          {{ resource.number }}
+      {% endif %}
+        </td>
+    {% endif %}
         <td class="has-text-left">
           <a href="{{ resource.file.url }}">
             {{ resource.title }}
