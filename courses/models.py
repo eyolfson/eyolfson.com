@@ -150,8 +150,15 @@ class Resource(models.Model):
         return f'{self.title} - {kind_label}{number} - {self.offering}'
 
     class Meta:
-        unique_together = ['offering', 'kind', 'number']
+        constraints = [
+            models.UniqueConstraint(
+                fields=['offering', 'kind'],
+                name='unique_offering_and_kind_with_null_number',
+                condition=models.Q(number__isnull=True),
+            ),
+        ]
         ordering = ['offering', 'kind', 'number', 'title']
+        unique_together = ['offering', 'kind', 'number']
 
 class LinkQuerySet(models.QuerySet):
 

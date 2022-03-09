@@ -29,21 +29,27 @@ class CoursesTestCase(TestCase):
             start=date(2021, 3, 9),
             active=True,
         )
-        resource = Resource.objects.create(
+        lecture_resource = Resource.objects.create(
             offering=offering,
             kind=Resource.Kind.LECTURE,
             number=1,
-            title='Resource Title',
+            title='Lecture 1 Title',
+        )
+        syllabus_resource = Resource.objects.create(
+            offering=offering,
+            kind=Resource.Kind.SYLLABUS,
+            number=None,
+            title='Syllabus Title',
         )
         offering_link = Link.objects.create(
             offering=offering,
             number=1,
             title='Offering Link',
         )
-        resource_link = Link.objects.create(
-            resource=resource,
+        lecture_resource_link = Link.objects.create(
+            resource=lecture_resource,
             number=1,
-            title='Resource Link',
+            title='Lecture 1 Link',
         )
 
     def test_resource_unique_number(self):
@@ -52,26 +58,19 @@ class CoursesTestCase(TestCase):
             Resource.objects.create(
                 offering=offering,
                 kind=Resource.Kind.LECTURE,
-                title='Resource Title',
                 number=1,
+                title='Lecture 1 Title',
             )
 
-    def test_resource_many_null_number(self):
+    def test_resource_unique_kind_null_number(self):
         offering = Offering.objects.get(slug='offering-slug')
-        r1 = Resource.objects.create(
-            offering=offering,
-            kind=Resource.Kind.LECTURE,
-            title='Resource Title',
-            number=None,
-        )
-        r2 = Resource.objects.create(
-            offering=offering,
-            kind=Resource.Kind.LECTURE,
-            title='Resource Title',
-            number=None,
-        )
-        r1.delete()
-        r2.delete()
+        with self.assertRaises(IntegrityError):
+            Resource.objects.create(
+                offering=offering,
+                kind=Resource.Kind.SYLLABUS,
+                number=None,
+                title='Syllabus Title',
+            )
 
     def test_link_not_both_offering_and_resource(self):
         offering = Offering.objects.get(slug='offering-slug')
