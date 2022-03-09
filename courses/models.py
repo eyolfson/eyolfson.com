@@ -143,7 +143,7 @@ class Resource(models.Model):
 
     def __str__(self):
         kind_label = Resource.Kind(self.kind).label
-        if self.number:
+        if self.number is not None:
             number = f' {self.number}'
         else:
             number = ''
