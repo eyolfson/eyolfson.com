@@ -6,29 +6,65 @@
 {% block description %}Jon Eyolfson teaches interactively with a mix of clear lectures and examples.{% endblock %}
 
 {% block content %}
-<article class="media">
-  <figure class="media-left">
-    <p class="image is-128x128">
-      <img class="is-rounded" src="{% static 'images/headshot.jpg' %}">
-    </p>
-  </figure>
-  <div class="media-content">
-    <div class="content">
-      <div class="block">
-       <h1 class="title">{{ request.site.name }}</h1>
-       <p class="subtitle is-5">Jonathan (Jon)</p>
-      </div>
-      <p>
-        Jon Eyolfson teaches interactively with a mix of clear lectures and
-        examples. In the past year, he has taught operating systems courses
-        while a postdoc at UCLA. Previously, he taught compiler courses at the
-        University of Waterloo. He received his Ph.D. from the University of
-        Waterloo, and holds a bachelors in Computer Engineering from Queen's
-        University.  Having decided to pursue a teaching career path, he is
-        currently looking for full-time opportunities where he can focus on
-        teaching and delivering the best learning experience to students.
+
+
+<div class="columns is-vcentered">
+  <div class="column is-2">
+      <p class="image is-128x128">
+        <img class="is-rounded" src="{% static 'images/headshot.jpg' %}">
       </p>
+  </div>
+  <div class="column">
+       <h1 class="title">Eyolfson</h1>
+       <p class="subtitle is-5">Jonathan (Jon)</p>
+  </div>
+</div>
+
+<div class="block">
+  <p>
+    Jon Eyolfson teaches interactively with a mix of clear lectures and
+    examples. In the past year, he has taught operating systems courses
+    while a postdoc at UCLA. Previously, he taught compiler courses at the
+    University of Waterloo. He received his Ph.D. from the University of
+    Waterloo, and holds a bachelors in Computer Engineering from Queen's
+    University.  Having decided to pursue a teaching career path, he is
+    currently looking for full-time opportunities where he can focus on
+    teaching and delivering the best learning experience to students.
+  </p>
+</div>
+
+<div class="block">
+  <div class="level">
+    <div class="level-item has-text-centered">
+      <div>
+        <a href="https://youtube.com/c/jonathaneyolfsonucla">
+          <p>
+            <i class="fab fa-youtube fa-4x"></i>
+          </p>
+          <p>YouTube</p>
+        </a>
+      </div>
+    </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <a href="https://twitch.tv/eyolfson">
+          <p>
+            <i class="fab fa-twitch fa-4x"></i>
+          </p>
+          <p>Twitch</p>
+        </a>
+      </div>
+    </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <a href="https://github.com/eyolfson">
+          <p>
+            <i class="fab fa-github fa-4x"></i>
+          </p>
+          <p>GitHub</p>
+        </a>
+      </div>
     </div>
   </div>
-</article>
+</div>
 {% endblock %}
