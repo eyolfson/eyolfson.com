@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}{{ offering.course.name }} - {{ request.site.name }}{% endblock %}
+{% block description %}The {% if offering.active %}source{% else %}archive{% endif %} for Jon Eyolfson's course content for {{ offering.name }} {{ offering.course.name }}.{% endblock %}
 
 {% block content %}
 <div class="block">

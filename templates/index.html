@@ -1,17 +1,34 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block title %}{{ request.site.name }}{% endblock %}
+{% block description %}Jon Eyolfson teaches interactively with a mix of clear lectures and examples.{% endblock %}
 
 {% block content %}
-<div class="block">
-  <h1 class="title">{{ request.site.name }}</h1>
-  <p class="subtitle is-5">Jonathan (Jon)</p>
-</div>
-
-<div class="block">
-  <p>
-    I'm currently on the job market! I'm interested in faculty positions
-    focusing on teaching.
-  </p>
-</div>
+<article class="media">
+  <figure class="media-left">
+    <p class="image is-128x128">
+      <img class="is-rounded" src="{% static 'images/headshot.jpg' %}">
+    </p>
+  </figure>
+  <div class="media-content">
+    <div class="content">
+      <div class="block">
+       <h1 class="title">{{ request.site.name }}</h1>
+       <p class="subtitle is-5">Jonathan (Jon)</p>
+      </div>
+      <p>
+        Jon Eyolfson teaches interactively with a mix of clear lectures and
+        examples. In the past year, he has taught operating systems courses
+        while a postdoc at UCLA. Previously, he taught compiler courses at the
+        University of Waterloo. He received his Ph.D. from the University of
+        Waterloo, and holds a bachelors in Computer Engineering from Queen's
+        University.  Having decided to pursue a teaching career path, he is
+        currently looking for full-time opportunities where he can focus on
+        teaching and delivering the best learning experience to students.
+      </p>
+    </div>
+  </div>
+</article>
 {% endblock %}
