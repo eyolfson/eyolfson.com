@@ -1,4 +1,4 @@
-FROM python:3.10.2-slim-bullseye
+FROM python:3.10.4-slim-bullseye
 
 WORKDIR /opt/eyolfson.com
 
@@ -12,8 +12,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   default-libmysqlclient-dev
 COPY requirements.txt .
 RUN pip install -U pip && pip install -r requirements.txt && pip install \
-  daphne \
-  mysqlclient
+  daphne==3.0.2 \
+  mysqlclient==2.1.0
 
 COPY . .
 RUN mv .dockerversion VERSION
