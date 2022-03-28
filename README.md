@@ -1,6 +1,6 @@
 # eyolfson.com
 
-A simple Django site.
+Jon Eyolfson's personal Django site
 
 ## Quickstart Commands
 
