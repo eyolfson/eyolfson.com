@@ -2,6 +2,18 @@
 
 A simple Django site.
 
+## Quickstart Commands
+
+To get a development environment started with default settings, run the
+following commands:
+
+    python -m venv venv
+    source venv/bin/activate
+    pip install -U pip; pip install -r requirements.txt
+    python manage.py migrate
+    python manage.py syncstatic
+    python manage.py runserver
+
 ## Static Files
 
 The only static files in this repository are the JavaScript source files. All
