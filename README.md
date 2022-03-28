@@ -2,9 +2,15 @@
 
 A simple Django site.
 
-# Static Files
+## Static Files
 
-You need to ensure you have the CSS files setup. If you're on macOS, you can
+The only static files in this repository are the JavaScript source files. All
+other files either need to be created locally or synchronized with the server. 
+To get any missing files from the canonical server run the following command:
+
+    python manage.py syncstatic
+
+If you'd like, you can generate the CSS files yourself. On macOS, you can
 install the command line tool with `brew install sass/sass/sass`. Afterwards,
 run the following command in the base directory:
 
