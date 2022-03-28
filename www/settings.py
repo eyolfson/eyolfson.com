@@ -50,6 +50,7 @@ WSGI_APPLICATION = 'www.wsgi.application'
 # Models
 INSTALLED_APPS = [
     'courses',
+    'sync',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
