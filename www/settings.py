@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.sites',
+    'django.contrib.sitemaps',
     'django.contrib.staticfiles',
     'django_cleanup.apps.CleanupConfig',
 ]

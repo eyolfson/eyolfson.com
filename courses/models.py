@@ -1,18 +1,48 @@
 import os
 
 from django.db import models
+from django.urls import reverse, NoReverseMatch
 from django.utils.text import slugify
+
+class InstitutionQuerySet(models.QuerySet):
+
+    def with_archived_offerings(self):
+        return self.annotate(
+            num_archived_offerings=models.Count(
+                'course__offering',
+                filter=models.Q(course__offering__active=False)
+            )
+        ).filter(num_archived_offerings__gt=0)
 
 class Institution(models.Model):
 
     slug = models.SlugField(max_length=50)
     name = models.CharField(max_length=50)
 
+    objects = InstitutionQuerySet.as_manager()
+
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        if Offering.objects.filter(course__institution=self,
+                                   active=False) \
+                           .exists():
+            return reverse('courses:archive_institution',
+                            kwargs={'institution_slug': self.slug})
+        raise NoReverseMatch(f'{self} has no archived offerings')
+
     class Meta:
         ordering = ['name']
+
+class CourseQuerySet(models.QuerySet):
+
+    def with_archived_offerings(self):
+        return self.annotate(
+            num_archived_offerings=models.Count(
+                'offering', filter=models.Q(offering__active=False)
+            )
+        ).filter(num_archived_offerings__gt=0)
 
 class Course(models.Model):
 
@@ -24,8 +54,18 @@ class Course(models.Model):
     name = models.CharField(max_length=50)
     title = models.CharField(max_length=80)
 
+    objects = CourseQuerySet.as_manager()
+
     def __str__(self):
         return f'{self.title} ({self.name})'
+
+    def get_absolute_url(self):
+        if Offering.objects.filter(course=self, active=False).exists():
+            return reverse('courses:archive_course', kwargs={
+                'institution_slug': self.institution.slug,
+                'course_slug': self.slug,
+            })
+        raise NoReverseMatch(f'{self} has no archived offerings')
 
     class Meta:
         ordering = ['title']
@@ -43,6 +83,16 @@ class Offering(models.Model):
 
     def __str__(self):
         return f'{self.name} {self.course}'
+
+    def get_absolute_url(self):
+        if self.active:
+            return reverse('courses:course', kwargs={'course_slug': self.course.slug})
+        else:
+            return reverse('courses:archive_offering', kwargs={
+                'institution_slug': self.course.institution.slug,
+                'course_slug': self.course.slug,
+                'offering_slug': self.slug,
+            })
 
     class Meta:
         ordering = ['-start', 'name']

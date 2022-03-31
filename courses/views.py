@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.shortcuts import get_object_or_404, render
 from django.views import generic
 
@@ -48,6 +49,9 @@ def archive_institution(request, institution_slug):
     institution = get_object_or_404(Institution,
         slug=institution_slug,
     )
+    if not Offering.objects.filter(course__institution=institution,
+                                   active=False).exists():
+        raise Http404(f'{institution} has no archived offerings.')
     return render(request, 'courses/course_list.html', {
         'institution': institution,
         'offerings': get_archive_offerings(
@@ -60,6 +64,8 @@ def archive_course(request, institution_slug, course_slug):
         institution__slug=institution_slug,
         slug=course_slug,
     )
+    if not Offering.objects.filter(course=course, active=False).exists():
+        raise Http404(f'{course} has no archived offerings.')
     return render(request, 'courses/offering_list.html', {
         'course': course,
         'offerings': get_archive_offerings(
@@ -73,6 +79,7 @@ def archive_offering(request, institution_slug, course_slug, offering_slug):
         course__institution__slug=institution_slug,
         course__slug=course_slug,
         slug=offering_slug,
+        active=False,
     )
     return offering_detail(request, offering)
 
