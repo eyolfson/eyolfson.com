@@ -15,7 +15,6 @@ class StaticViewSitemap(sitemaps.Sitemap):
     def location(self, item):
         return reverse(item)
 
-
 class CourseSitemap(sitemaps.Sitemap):
 
     changefreq = 'monthly'
@@ -76,6 +75,4 @@ courses_sitemap = {
     'courses_course': CourseSitemap,
     'courses_inactive_offering': InactiveOfferingSitemap,
     'courses_active_offering': ActiveOfferingSitemap,
-    'courses_inactive_resource': InactiveResourceSitemap,
-    'courses_active_resource': ActiveResourceSitemap,
 }
