@@ -56,7 +56,7 @@ class InactiveResourceSitemap(sitemaps.Sitemap):
         return Resource.objects.filter(offering__active=False)
 
     def location(self, item):
-        return item.file
+        return item.file.url
 
 class ActiveResourceSitemap(sitemaps.Sitemap):
 
