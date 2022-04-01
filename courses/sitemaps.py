@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import sitemaps
 from django.urls import reverse
 
@@ -56,7 +57,7 @@ class InactiveResourceSitemap(sitemaps.Sitemap):
         return Resource.objects.filter(offering__active=False)
 
     def location(self, item):
-        return item.file.url
+        return f'{settings.MEDIA_URL}{item.file}'
 
 class ActiveResourceSitemap(sitemaps.Sitemap):
 
@@ -67,7 +68,7 @@ class ActiveResourceSitemap(sitemaps.Sitemap):
         return Resource.objects.filter(offering__active=True)
 
     def location(self, item):
-        return item.file.url
+        return f'{settings.MEDIA_URL}{item.file}'
 
 courses_sitemap = {
     'courses_static': StaticViewSitemap,
