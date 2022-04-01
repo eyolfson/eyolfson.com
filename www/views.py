@@ -7,7 +7,7 @@ def robots(request):
     )
     return TemplateResponse(
         request,
-        'robots.txt',
+        "robots.txt",
         {"sitemap": sitemap},
-        content_type='text/plain',
+        content_type="text/plain",
     )
