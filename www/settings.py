@@ -9,6 +9,12 @@ ALLOWED_HOSTS = json.loads(os.environ.setdefault('ALLOWED_HOSTS', '[]'))
 CSRF_TRUSTED_ORIGINS = json.loads(
     os.environ.setdefault('CSRF_TRUSTED_ORIGINS', '[]')
 )
+SECURE_PROXY_SSL_HEADER = json.loads(
+    os.environ.setdefault('SECURE_PROXY_SSL_HEADER', 'null')
+)
+USE_X_FORWARDED_HOST = json.loads(
+    os.environ.setdefault('USE_X_FORWARDED_HOST', 'false')
+)
 
 # Database
 DATABASES = json.loads(os.environ.setdefault('DATABASES', json.dumps({
