@@ -47,28 +47,6 @@ class ActiveOfferingSitemap(sitemaps.Sitemap):
     def items(self):
         return Offering.objects.filter(active=True)
 
-class InactiveResourceSitemap(sitemaps.Sitemap):
-
-    changefreq = 'never'
-    protocol = 'https'
-
-    def items(self):
-        return Resource.objects.filter(offering__active=False)
-
-    def location(self, item):
-        return f'{settings.MEDIA_URL}{item.file}'
-
-class ActiveResourceSitemap(sitemaps.Sitemap):
-
-    changefreq = 'daily'
-    protocol = 'https'
-
-    def items(self):
-        return Resource.objects.filter(offering__active=True)
-
-    def location(self, item):
-        return f'{settings.MEDIA_URL}{item.file}'
-
 courses_sitemap = {
     'courses_static': StaticViewSitemap,
     'courses_institution': InstitutionSitemap,
