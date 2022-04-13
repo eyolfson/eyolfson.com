@@ -12,7 +12,7 @@ class InstitutionQuerySet(models.QuerySet):
                 'course__offering',
                 filter=models.Q(course__offering__active=False)
             )
-        ).filter(num_archived_offerings__gt=0)
+        ).filter(num_archived_offerings__gt=0).order_by('slug')
 
 class Institution(models.Model):
 
@@ -33,7 +33,7 @@ class Institution(models.Model):
         raise NoReverseMatch(f'{self} has no archived offerings')
 
     class Meta:
-        ordering = ['name']
+        ordering = ['slug']
 
 class CourseQuerySet(models.QuerySet):
 
@@ -42,7 +42,7 @@ class CourseQuerySet(models.QuerySet):
             num_archived_offerings=models.Count(
                 'offering', filter=models.Q(offering__active=False)
             )
-        ).filter(num_archived_offerings__gt=0)
+        ).filter(num_archived_offerings__gt=0).order_by('slug')
 
 class Course(models.Model):
 
@@ -68,7 +68,7 @@ class Course(models.Model):
         raise NoReverseMatch(f'{self} has no archived offerings')
 
     class Meta:
-        ordering = ['title']
+        ordering = ['slug']
 
 class Offering(models.Model):
 
@@ -95,7 +95,7 @@ class Offering(models.Model):
             })
 
     class Meta:
-        ordering = ['-start', 'name']
+        ordering = ['-start', 'slug']
 
 class ResourceQuerySet(models.QuerySet):
 
