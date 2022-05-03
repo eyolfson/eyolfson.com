@@ -36,7 +36,8 @@ jobs:
         shell: bash
         run: |
           ./version.sh > .dockerversion
-          echo "VERSION=${$(cat .dockerversion)%+*}" >> $GITHUB_ENV
+          VERSION=$(cat .dockerversion)
+          echo "VERSION=${VERSION%+*}" >> $GITHUB_ENV
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
