@@ -2,6 +2,7 @@
 
 version="$(cat $(dirname "$0")/VERSION)"
 version_full="$(echo ${version} | cut -d '-' -f1 -s)"
+# The `version_full`` variable is empty if there's no "-" delimiter
 if [ -z "${version_full}" ]; then
     version_full="${version}"
     version_pre=""
@@ -58,8 +59,8 @@ fi
 
 if [ -n "${git_commit_count}" ]; then
     if [ -z "${version_pre}" ]; then
-	    echo "Pre-release version needs a pre-release" 1>&2
-	    exit 1
+        echo "Pre-release version needs a pre-release in VERSION file" 1>&2
+        exit 1
     fi
     git_commit_id=$(git rev-parse --short=6 HEAD 2> /dev/null)
     if [ $? -ne 0 ]; then
