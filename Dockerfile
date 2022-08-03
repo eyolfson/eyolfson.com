@@ -9,8 +9,8 @@ ENV PYTHONPATH="/opt/eyolfson.com"
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
   build-essential \
-  default-libmysqlclient-dev \
-  rustc
+  cargo \
+  default-libmysqlclient-dev
 COPY requirements.txt .
 RUN pip install -U pip && pip install -r requirements.txt && pip install \
   daphne==3.0.2 \
