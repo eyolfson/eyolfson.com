@@ -56,6 +56,7 @@ WSGI_APPLICATION = 'www.wsgi.application'
 # Models
 INSTALLED_APPS = [
     'courses',
+    'eyolfbot',
     'sync',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -131,3 +132,6 @@ AWS_S3_CUSTOM_DOMAIN = os.environ.setdefault('AWS_S3_CUSTOM_DOMAIN', '')
 AWS_S3_ENDPOINT_URL = os.environ.setdefault('AWS_S3_ENDPOINT_URL', '')
 AWS_S3_SECRET_ACCESS_KEY = os.environ.setdefault('AWS_S3_SECRET_ACCESS_KEY', '')
 AWS_S3_FILE_OVERWRITE = True
+
+# Eyolfbot
+EYOLFBOT_DISCORD_TOKEN = os.environ.setdefault('EYOLFBOT_DISCORD_TOKEN', '')
