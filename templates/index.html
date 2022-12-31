@@ -6,35 +6,29 @@
 {% block description %}Jon Eyolfson teaches interactively with a mix of clear lectures and examples.{% endblock %}
 
 {% block content %}
-<div class="columns is-vcentered">
-  <div class="column is-2">
-      <p class="image is-128x128">
-        <img class="is-rounded"
-             src="{% static 'images/headshot.jpg' %}"
-             alt="Jonathan Eyolfson's Headshot"
-             width="128"
-             height="128">
-      </p>
-  </div>
-  <div class="column">
-    <div class="content">
-      <h1 class="title">Eyolfson</h1>
-      <p class="subtitle is-5">Jonathan (Jon)</p>
-    </div>
-    <div class="content">
-      <p class="title is-5">
-        University of Toronto
-      </p>
-      <p class="subtitle is-6">
-        Assistant Professor, Teaching Stream
-        <br>
-        Electrical and Computer Engineering
-      </p>
-    </div>
+<div class="is-flex is-justify-content-center is-align-items-center" style="gap: 1rem;">
+  <figure class="image is-128x128">
+    <img class="is-rounded"
+         src="{% static 'images/headshot.jpg' %}"
+         alt="Jonathan Eyolfson's Headshot"
+         width="128"
+         height="128">
+  </figure>
+  <div class="has-text-centered">
+    <p class="title is-3">Jon Eyolfson</p>
+    <p class="subtitle is-5">
+      <strong>University of Toronto</strong>
+      <br>
+      Assistant Professor, Teaching Stream
+      <br>
+      Electrical and Computer Engineering
+    </p>
   </div>
 </div>
 
-<div class="block">
+<br>
+
+<div class="content">
   <p>
     Jon Eyolfson teaches interactively with a mix of clear lectures and
     examples. This year he'll be starting at the University of Toronto.
@@ -47,27 +41,22 @@
   </p>
 </div>
 
-<div class="block">
-  <div class="level">
-    <div class="level-item has-text-centered">
-      <div>
-        <a href="https://www.youtube.com/channel/UCRUDk5mnr_ofVRrYqbUk-wQ">
-          <p>
-            <i class="fab fa-youtube fa-4x"></i>
-          </p>
-          <p>YouTube</p>
-        </a>
-      </div>
+<div class="is-flex is-justify-content-center is-align-items-center"
+     style="gap: 3rem;">
+  <div class="has-text-centered">
+    <div>
+      <a href="https://www.youtube.com/channel/UCRUDk5mnr_ofVRrYqbUk-wQ">
+        <p><i class="fab fa-youtube fa-4x"></i></p>
+        <p>YouTube</p>
+      </a>
     </div>
-    <div class="level-item has-text-centered">
-      <div>
-        <a href="https://github.com/eyolfson">
-          <p>
-            <i class="fab fa-github fa-4x"></i>
-          </p>
-          <p>GitHub</p>
-        </a>
-      </div>
+  </div>
+  <div class="has-text-centered">
+    <div>
+      <a href="https://github.com/eyolfson">
+        <p><i class="fab fa-github fa-4x"></i></p>
+        <p>GitHub</p>
+      </a>
     </div>
   </div>
 </div>
