@@ -1,9 +1,8 @@
 from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap
 from django.urls import path, include
-from django.views.generic import TemplateView
 
-from .views import robots
+from .views import IndexView, robots
 from .sitemaps import StaticViewSitemap
 from courses.sitemaps import courses_sitemap
 
@@ -13,7 +12,7 @@ sitemaps = {
 sitemaps.update(courses_sitemap)
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name="index.html"), name='index'),
+    path('', IndexView.as_view(), name='index'),
     path('robots.txt', robots, name='robots'),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap'),

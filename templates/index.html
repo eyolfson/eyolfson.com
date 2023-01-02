@@ -41,12 +41,22 @@
   </p>
 </div>
 
-<div class="is-flex is-justify-content-center is-align-items-center"
+<div class="is-flex is-justify-content-center is-align-items-baseline"
      style="gap: 3rem;">
+{% for offering in active_offerings %}
+  <div class="has-text-centered">
+    <div>
+      <a href="{% url 'courses:course' offering.course.slug %}">
+        <p><i class="fa-solid fa-graduation-cap fa-4x"></i></p>
+        <p>{{ offering.name }}<br>{{ offering.course.name }}</p>
+      </a>
+    </div>
+  </div>
+{% endfor %}
   <div class="has-text-centered">
     <div>
       <a href="https://www.youtube.com/channel/UCRUDk5mnr_ofVRrYqbUk-wQ">
-        <p><i class="fab fa-youtube fa-4x"></i></p>
+        <p><i class="fa-brands fa-youtube fa-4x"></i></p>
         <p>YouTube</p>
       </a>
     </div>
@@ -54,7 +64,7 @@
   <div class="has-text-centered">
     <div>
       <a href="https://github.com/eyolfson">
-        <p><i class="fab fa-github fa-4x"></i></p>
+        <p><i class="fa-brands fa-github fa-4x"></i></p>
         <p>GitHub</p>
       </a>
     </div>
