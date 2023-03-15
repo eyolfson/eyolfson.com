@@ -58,6 +58,8 @@ INSTALLED_APPS = [
     'courses',
     'eyolfbot',
     'sync',
+    'rest_framework',
+    'rest_framework.authtoken',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -135,3 +137,10 @@ AWS_S3_FILE_OVERWRITE = True
 
 # Eyolfbot
 EYOLFBOT_DISCORD_TOKEN = os.environ.setdefault('EYOLFBOT_DISCORD_TOKEN', '')
+
+# Django REST Framework
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'www.authentication.BearerAuthentication',
+    ]
+}

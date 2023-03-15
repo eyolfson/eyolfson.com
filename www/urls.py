@@ -11,6 +11,13 @@ sitemaps = {
 }
 sitemaps.update(courses_sitemap)
 
+from rest_framework import routers
+from eyolfbot.views import UserViewSet, RoleViewSet, MembershipViewSet
+router = routers.DefaultRouter()
+router.register(r'eyolfbot/users', UserViewSet)
+router.register(r'eyolfbot/roles', RoleViewSet)
+router.register(r'eyolfbot/memberships', MembershipViewSet)
+
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
     path('robots.txt', robots, name='robots'),
@@ -18,4 +25,5 @@ urlpatterns = [
          name='django.contrib.sitemaps.views.sitemap'),
     path('courses/', include('courses.urls')),
     path('admin/', admin.site.urls),
+    path('api/', include(router.urls)),
 ]
