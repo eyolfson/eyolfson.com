@@ -16,6 +16,18 @@ USE_X_FORWARDED_HOST = json.loads(
     os.environ.setdefault('USE_X_FORWARDED_HOST', 'false')
 )
 
+# Authentication
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.gitlab.GitLabOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+SOCIAL_AUTH_GITLAB_KEY = os.environ.setdefault('SOCIAL_AUTH_GITLAB_KEY', '')
+SOCIAL_AUTH_GITLAB_SECRET = os.environ.setdefault('SOCIAL_AUTH_GITLAB_SECRET',
+                            '')
+SOCIAL_AUTH_GITLAB_API_URL = os.environ.setdefault('SOCIAL_AUTH_GITLAB_API_URL',
+                                                   '')
+
 # Database
 DATABASES = json.loads(os.environ.setdefault('DATABASES', json.dumps({
     'default': {
@@ -57,6 +69,7 @@ WSGI_APPLICATION = 'www.wsgi.application'
 INSTALLED_APPS = [
     'courses',
     'eyolfbot',
+    'social_django',
     'sync',
     'django.contrib.admin',
     'django.contrib.auth',

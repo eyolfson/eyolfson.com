@@ -13,6 +13,7 @@ sitemaps.update(courses_sitemap)
 
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
+    path('social/', include('social_django.urls', namespace='social')),
     path('robots.txt', robots, name='robots'),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap'),

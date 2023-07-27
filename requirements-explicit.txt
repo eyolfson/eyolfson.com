@@ -3,3 +3,4 @@ discord.py
 Django
 django-cleanup
 django-storages
+social-auth-app-django
