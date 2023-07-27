@@ -29,6 +29,7 @@ class Command(BaseCommand):
             if os.path.exists(full_path):
                 continue
             url = f'https://eyolfson.com/static/{path}'
+            os.makedirs(os.path.dirname(full_path), exist_ok=True)
             with opener.open(url) as input, open(full_path, 'wb') as output:
                 while True:
                     data = input.read(4096)
