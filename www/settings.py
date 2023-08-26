@@ -150,6 +150,7 @@ AWS_S3_SECRET_ACCESS_KEY = os.environ.setdefault('AWS_S3_SECRET_ACCESS_KEY', '')
 AWS_S3_FILE_OVERWRITE = True
 
 # Eyolfbot
+EYOLFBOT_REDIRECT_URI = os.environ.setdefault('EYOLFBOT_REDIRECT_URI', '')
 EYOLFBOT_BOT_TOKEN = os.environ.setdefault('EYOLFBOT_BOT_TOKEN', '')
 EYOLFBOT_CLIENT_ID = os.environ.setdefault('EYOLFBOT_CLIENT_ID', '')
 EYOLFBOT_CLIENT_SECRET = os.environ.setdefault('EYOLFBOT_CLIENT_SECRET', '')

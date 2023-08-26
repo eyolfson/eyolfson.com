@@ -12,7 +12,6 @@ import requests
 from .models import Connection
 
 API_ENDPOINT = 'https://discord.com/api/v10'
-REDIRECT_URI = 'http://localhost:8000/discord/'
 
 def get_discord_token(code):
     url = f'{API_ENDPOINT}/oauth2/token'
@@ -21,7 +20,7 @@ def get_discord_token(code):
         'client_secret': settings.EYOLFBOT_CLIENT_SECRET,
         'grant_type': 'authorization_code',
         'code': code,
-        'redirect_uri': REDIRECT_URI,
+        'redirect_uri': settings.EYOLFBOT_REDIRECT_URI,
     }
     headers = {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -64,8 +63,7 @@ def discord(request):
         pass
 
     if not 'code' in request.GET:
-        redirect_uri = urlencode({'redirect_uri': REDIRECT_URI})
-        print(redirect_uri)
+        redirect_uri = urlencode({'redirect_uri': settings.EYOLFBOT_REDIRECT_URI})
         return redirect(f'https://discord.com/api/oauth2/authorize?client_id={settings.EYOLFBOT_CLIENT_ID}&{redirect_uri}&response_type=code&scope=identify%20guilds.join')
 
     user = request.user
