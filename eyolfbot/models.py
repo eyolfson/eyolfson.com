@@ -9,8 +9,8 @@ class Connection(models.Model):
         related_name='eyolfbot_connection',
     )
     utoronto_id = models.CharField(max_length=255, db_index=True)
-    discord_id = models.PositiveIntegerField()
-    gitlab_id = models.PositiveIntegerField()
+    discord_id = models.PositiveBigIntegerField()
+    gitlab_id = models.PositiveBigIntegerField()
 
     def __str__(self):
         return str(self.user)
