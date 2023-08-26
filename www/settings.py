@@ -22,6 +22,7 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
 SOCIAL_AUTH_GITLAB_KEY = os.environ.setdefault('SOCIAL_AUTH_GITLAB_KEY', '')
 SOCIAL_AUTH_GITLAB_SECRET = os.environ.setdefault('SOCIAL_AUTH_GITLAB_SECRET',
                             '')
@@ -98,6 +99,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
                 'www.context_processors.canonical',
             ],
         },
@@ -147,4 +150,8 @@ AWS_S3_SECRET_ACCESS_KEY = os.environ.setdefault('AWS_S3_SECRET_ACCESS_KEY', '')
 AWS_S3_FILE_OVERWRITE = True
 
 # Eyolfbot
-EYOLFBOT_DISCORD_TOKEN = os.environ.setdefault('EYOLFBOT_DISCORD_TOKEN', '')
+EYOLFBOT_BOT_TOKEN = os.environ.setdefault('EYOLFBOT_BOT_TOKEN', '')
+EYOLFBOT_CLIENT_ID = os.environ.setdefault('EYOLFBOT_CLIENT_ID', '')
+EYOLFBOT_CLIENT_SECRET = os.environ.setdefault('EYOLFBOT_CLIENT_SECRET', '')
+EYOLFBOT_GUILD_ID = os.environ.setdefault('EYOLFBOT_GUILD_ID', '')
+EYOLFBOT_ROLES = json.loads(os.environ.setdefault('EYOLFBOT_ROLES', '[]'))

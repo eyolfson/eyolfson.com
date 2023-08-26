@@ -88,11 +88,11 @@ class Command(BaseCommand):
     help = 'Runs the Eyolfbot Discord client'
 
     def handle(self, *args, **options):
-        if settings.EYOLFBOT_DISCORD_TOKEN == '':
-            raise CommandError('EYOLFBOT_DISCORD_TOKEN not set')
+        if settings.EYOLFBOT_BOT_TOKEN == '':
+            raise CommandError('EYOLFBOT_BOT_TOKEN not set')
 
         intents = discord.Intents.default()
         intents.members = True
 
         client = EyolfbotClient(intents=intents)
-        client.run(settings.EYOLFBOT_DISCORD_TOKEN)
+        client.run(settings.EYOLFBOT_BOT_TOKEN)

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Discord{% endblock %}
+{% block description %}Connect your GitLab UofT account to your Discord account.{% endblock %}
+
+{% block content %}
+{% if connection %}
+<table class="table">
+    <tbody>
+        <tr>
+            <td><strong>UTORid:</strong></td>
+            <td>{{ connection.utoronto_id }}</td>
+        </tr>
+        <tr>
+            <td><strong>Discord ID:</strong></td>
+            <td>{{ connection.discord_id }}</td>
+        </tr>
+        <tr>
+            <td><strong>Gitlab ID:</strong></td>
+            <td>{{ connection.gitlab_id }}</td>
+        </tr>
+    </tbody>
+</table>
+{% endif %}
+
+<div class="content">
+<p>If there's something wrong you need to email Jon, you'll find his email on
+   the Quercus page.</p>
+</div>
+{% endblock %}
