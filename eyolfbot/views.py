@@ -53,6 +53,14 @@ def add_discord_guild_member(user_id, token):
     r.raise_for_status()
     return r.json()
 
+def add_discord_guild_roles(user_id, roles):
+    for role_id in roles:
+        url = f"{API_ENDPOINT}/guilds/{settings.EYOLFBOT_GUILD_ID}/members/{user_id}/roles/{role_id}"
+        headers = {
+            'Authorization': f"Bot {settings.EYOLFBOT_BOT_TOKEN}",
+        }
+        requests.put(url, headers=headers)
+
 @login_required(login_url='/social/login/gitlab/')
 def discord(request):
     try:
@@ -87,6 +95,8 @@ def discord(request):
     discord_id = int(discord_user_data['id'])
 
     guild_member_data = add_discord_guild_member(discord_id, discord_token)
+    if not guild_member_data:
+        add_discord_guild_roles(discord_id, settings.EYOLFBOT_ROLES)
 
     connection = Connection(user=request.user, utoronto_id=gitlab_username,
                             discord_id=discord_id, gitlab_id=gitlab_id)
