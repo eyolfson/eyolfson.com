@@ -7,9 +7,13 @@ from django.utils.http import urlencode
 from social_core.backends.gitlab import GitLabOAuth2
 from social_django.utils import load_strategy
 
+from rest_framework import viewsets
+from rest_framework import permissions
+
 import requests
 
 from .models import Connection
+from .serializers import ConnectionSerializer
 
 API_ENDPOINT = 'https://discord.com/api/v10'
 
@@ -103,3 +107,11 @@ def discord(request):
     connection.save()
 
     return redirect('eyolfbot:discord')
+
+class ConnectionViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Connection.objects.all()
+    serializer_class = ConnectionSerializer
+    permission_classes = [permissions.IsAuthenticated]

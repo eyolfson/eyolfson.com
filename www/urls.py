@@ -3,16 +3,21 @@ from django.contrib.auth import views as auth_views
 from django.contrib.sitemaps.views import sitemap
 from django.urls import path, include
 
+from rest_framework import routers
+
 from .views import IndexView, robots
 from .sitemaps import StaticViewSitemap
 from courses.sitemaps import courses_sitemap
 
-from eyolfbot.views import discord
+from eyolfbot.views import discord, ConnectionViewSet
 
 sitemaps = {
     'static': StaticViewSitemap,
 }
 sitemaps.update(courses_sitemap)
+
+router = routers.DefaultRouter()
+router.register(r'eyolfbot/connection', ConnectionViewSet)
 
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
@@ -25,4 +30,5 @@ urlpatterns = [
          name='django.contrib.sitemaps.views.sitemap'),
     path('courses/', include('courses.urls')),
     path('admin/', admin.site.urls),
+    path('api/', include(router.urls)),
 ]

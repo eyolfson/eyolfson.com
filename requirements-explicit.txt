@@ -1,6 +1,7 @@
 boto3
 discord.py
 Django
+djangorestframework
 django-cleanup
 django-storages
 social-auth-app-django

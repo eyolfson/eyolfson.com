@@ -72,6 +72,8 @@ INSTALLED_APPS = [
     'eyolfbot',
     'social_django',
     'sync',
+    'rest_framework',
+    'rest_framework.authtoken',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -156,3 +158,10 @@ EYOLFBOT_CLIENT_ID = os.environ.setdefault('EYOLFBOT_CLIENT_ID', '')
 EYOLFBOT_CLIENT_SECRET = os.environ.setdefault('EYOLFBOT_CLIENT_SECRET', '')
 EYOLFBOT_GUILD_ID = os.environ.setdefault('EYOLFBOT_GUILD_ID', '')
 EYOLFBOT_ROLES = json.loads(os.environ.setdefault('EYOLFBOT_ROLES', '[]'))
+
+# Django REST Framework
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'www.authentication.BearerAuthentication',
+    ]
+}
