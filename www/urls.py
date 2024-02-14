@@ -5,7 +5,7 @@ from django.urls import path, include
 
 from rest_framework import routers
 
-from .views import IndexView, robots
+from .views import IndexView, gpg_public_key, robots
 from .sitemaps import StaticViewSitemap
 from courses.sitemaps import courses_sitemap
 
@@ -31,4 +31,5 @@ urlpatterns = [
     path('courses/', include('courses.urls')),
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    path('.well-known/openpgpkey/hu/euh8tm9f856gpp58qk6aezismfnq5yt1', gpg_public_key),
 ]
