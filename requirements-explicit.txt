@@ -1,7 +1,7 @@
-boto3
 discord.py
 Django
 djangorestframework
 django-cleanup
-django-storages
+django-storages[s3]
 social-auth-app-django
+whitenoise

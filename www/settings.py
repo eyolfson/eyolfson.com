@@ -42,8 +42,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 DEBUG = json.loads(os.environ.setdefault('DEBUG', 'true'))
 
 # File uploads
-DEFAULT_FILE_STORAGE = os.environ.setdefault('DEFAULT_FILE_STORAGE',
-    'django.core.files.storage.FileSystemStorage')
+STORAGES = json.loads(os.environ.setdefault("STORAGES", json.dumps({
+    "default": {
+        "BACKEND": 'django.core.files.storage.FileSystemStorage',
+    },
+    "staticfiles": {
+        "BACKEND": 'django.contrib.staticfiles.storage.StaticFilesStorage',
+    },
+})))
+
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = os.environ.setdefault('MEDIA_URL', 'media/')
 
@@ -56,6 +63,7 @@ USE_TZ = True
 # HTTP
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -134,15 +142,8 @@ AUTH_PASSWORD_VALIDATORS = [
 SITE_ID = json.loads(os.environ.setdefault('SITE_ID', '1'))
 
 # Static Files
+STATIC_ROOT = os.environ.setdefault('STATIC_ROOT', str(BASE_DIR / 'static'))
 STATIC_URL = os.environ.setdefault('STATIC_URL', 'static/')
-STATICFILES_DIRS = json.loads(
-    os.environ.setdefault('STATICFILES_DIRS', json.dumps(
-            [str(BASE_DIR / 'static')]
-        )
-    )
-)
-STATICFILES_STORAGE = os.environ.setdefault('STATICFILES_STORAGE',
-    'django.contrib.staticfiles.storage.StaticFilesStorage')
 
 # Storages
 AWS_S3_ACCESS_KEY_ID = os.environ.setdefault('AWS_S3_ACCESS_KEY_ID', '')

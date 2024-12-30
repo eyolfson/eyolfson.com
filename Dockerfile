@@ -1,4 +1,4 @@
-FROM python:3.11.4-slim-bookworm
+FROM python:3-slim-bookworm
 
 WORKDIR /opt/eyolfson.com
 
@@ -11,10 +11,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     libpq-dev
 COPY requirements.txt .
-RUN pip install -U pip && pip install -r requirements.txt && pip install \
-  daphne==4.0.0 \
-  psycopg2==2.9.5
+RUN pip install -U pip && \
+  pip install -r requirements.txt && \
+  pip install daphne "psycopg[binary,pool]"
 
 COPY . .
+RUN python manage.py collectstatic --no-input
 RUN mv .dockerversion VERSION
 CMD ["daphne", "-b", "0.0.0.0", "www.asgi:application"]
